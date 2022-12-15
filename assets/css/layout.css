@@ -1,0 +1,432 @@
+/* ----- LAYOUTS ----- */
+body{
+    margin: 0;
+}
+.container--fullwidth{
+    width: 100%;
+    margin: 0;
+    display: block;
+}
+.container--without-sidebar{
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    padding: var(--space-gutter) 0;
+    --space-margin-tb: var(--space-c);
+    --space-padding-tb: var(--space-c);
+}
+.post-content-container{
+    width:var(--width-wide)!important;
+    padding: var(--space-gutter) 0;
+    margin: 0 auto!important;
+}
+.container--narrow{
+    max-width: var(--width-default);
+    margin: var(--space-margin-tb) auto;
+}
+
+
+/* -- gutenberg overrides -- */
+iframe{
+    width:100%;
+}
+
+/*-- widths &  left/right padding & margins --*/
+
+/* set max width of top level divs which are not don't have set width to defult and center*/
+.container--main > div:not(.alignfull):not(.alignwide),
+.alignwide,
+.alignfull{
+    width: 100%;
+}
+
+.container--main .wp-block-group.alignfull.has-background:last-child{
+    margin-bottom: 0;
+} 
+.container--main > div:not(.alignfull):not(.alignwide){
+    max-width: var(--width-default);
+}
+/* set any level alignwide divs max width to wide and center*/
+.alignwide{
+    max-width: var(--width-wide);
+}
+/* set alignfull divs max width to full width*/
+.alignfull{
+    max-width: 100%;
+}s
+/*create space between alignwide & default divs with backgrounds and edge of screen*/
+.container--main > .has-background:not(.alignfull),
+.container--main > .wp-block-cover:not(.alignfull){
+    width: calc(100% - (var(--space-gutter) * 2));
+}
+/*center content which is not full width*/
+.container--main > .alignwide,
+.container--main > *:not(.alignfull):not(.alignwide),
+.container--main > div > div > .wp-block-group, /*groups within covers or groups*/
+.container--main > div > div > .wp-block-columns /*columns within covers or groups*/{
+    margin-left: auto;
+    margin-right: auto
+}
+
+/* line up top-level wide-width and default-width content with background with content with no background*/
+.container--main > .has-background:not(.alignfull){  
+    max-width: calc(var(--width-default) - (var(--space-gutter) * 2)); 
+}
+.container--main > .has-background.alignwide{  
+    max-width: calc(var(--width-wide) - (var(--space-gutter) * 2)); 
+}
+
+/*adjustment for layout with sidebar*/
+/* bring edges of top level default width content with background inline with text of content with no background*/
+.container--with-sidebar .container--main > .alignfull.has-background, 
+.container--with-sidebar .container--main > .alignfull.wp-block-cover{
+    width: calc(100% - (var(--space-gutter) * 2));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*add left and right padding to all top-level divs*/
+.container--main > *,
+.container--main > .wp-block-group.has-background /* specificity required to override default gutenberg*/
+{
+    padding-left: var(--space-gutter);
+    padding-right: var(--space-gutter);
+}
+
+
+/* -- covers -- */
+/* if content position is set, the left & right alignments sit within the max content range*/
+.container--main > .wp-block-cover.alignfull.has-custom-content-position{
+    padding-left: calc((100% - var(--width-wide)) / 2 + var(--space-gutter)); 
+    padding-right: calc((100% - var(--width-wide)) / 2 + var(--space-gutter)); 
+}
+@media(max-width: 90em){
+    .container--main > .wp-block-cover.alignfull.has-custom-content-position{
+        padding-left: var(--space-gutter); 
+        padding-right: var(--space-gutter); 
+    }
+}
+/*center the child content if there is no set position */
+.container--main> .wp-block-cover.alignfull:not(.has-custom-content-position)  > .wp-block-cover__inner-container,
+
+/* -- groups -- */
+
+/*sets edge of colour block in line with width of text of other blocks*/
+.wp-block-group.has-background:not(.alignfull):not(.alignwide),
+.wp-block-cover.alignfull .wp-block-cover__inner-container > .wp-block-group.has-background:not(.alignfull):not(.alignwide){
+    max-width: calc(var(--width-default) - var(--space-gutter) * 2);  
+}
+.wp-block-group.alignwide.has-background{
+    max-width: calc(var(--width-wide) - var(--space-gutter) * 2); 
+}
+
+/*pad non-top-level groups with background colours (colour panels)*/
+.container--main div .wp-block-group.has-background{
+    padding-left: var(--space-panel-padding-lr); 
+    padding-right: var(--space-panel-padding-lr);
+}
+
+.container--main> .wp-block-group.alignfull .wp-block-group__inner-container > *.has-text-align-center:not(div){
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* if cover or group is fullwidth, bring second level text content into default width*/
+.container--main > .wp-block-cover.alignfull:not(.has-custom-content-position) > .wp-block-cover__inner-container > *:not(div),
+.container--main> .wp-block-group.alignfull .wp-block-group__inner-container > *:not(div){
+    max-width: var(--width-default); 
+    padding-left: var(--space-gutter);
+    padding-right: var(--space-gutter);
+}
+.container--main > .wp-block-cover.alignfull:not(.has-custom-content-position) > .wp-block-cover__inner-container > .wp-block-video.aligncenter{
+    width: 1140px!important;
+    padding: 0!important;
+}
+
+/*if above isn't centered; left align it*/
+.container--main > .wp-block-cover.alignfull:not(.has-custom-content-position) > .wp-block-cover__inner-container > *:not(div):not(.has-text-align-center),
+.container--main> .wp-block-group.alignfull .wp-block-group__inner-container > *:not(div):not(.has-text-align-center){
+    margin-left: auto;
+    margin-right: auto;
+}
+/*adjustment for lists*/
+.container--main> .wp-block-group.alignfull .wp-block-group__inner-container > ul{
+    padding-left: calc(var(--space-gutter) + 20px);
+}
+.container--main> .wp-block-group.alignfull .wp-block-group__inner-container > ul.custom-icon{
+    padding-left: var(--space-gutter);
+}
+@media(max-width: 90rem){
+    .container--main > .wp-block-cover.alignfull:not(.has-custom-content-position) > .wp-block-cover__inner-container > *:not(div),
+    .container--main> .wp-block-group.alignfull .wp-block-group__inner-container > *:not(div){
+        /*margin-left: 0!important;*/
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .container--main> .wp-block-group.alignfull .wp-block-group__inner-container > ul{
+        padding-left: 20px;
+    }
+}
+
+/* -- columns -- */
+/*set gap between columns*/
+.wp-block-columns{
+    gap: var(--space-gap); 
+}
+
+/*no-gap columns for full-colour panels (50/50 colour panels)*/
+.wp-block-columns.alignfull{ 
+    gap: 0; 
+    padding-left: 0;
+    padding-right: 0;
+}
+/* -- overrides default gutenberg method of setting gaps between columns (margin-lefting columns)*/
+.wp-block-column{
+    margin-left: 0!important; 
+}
+/* -- add inner padding to columns with bgs (cards/panels) -- */
+.wp-block-column.has-background{
+    padding-left: var(--space-panel-padding-lr);
+    padding-right: var(--space-panel-padding-lr)
+}
+/* remove top margin for second div if both has beige background colours and are alignfull*/
+.wp-block-group.alignfull.has-beige-background-color + .wp-block-group.alignfull.has-beige-background-color{
+    margin-top: var(--space--f)!important;
+    padding-top: var(--space--f)!important;
+}
+/*limit width of text content to within the 'wide' content area if there are only 2 columns (e.g. for 50/50 coloured panels)*/
+.wp-block-columns.alignfull > .wp-block-column.has-background:first-child:nth-last-child(2) > *,
+.wp-block-columns.alignfull > .wp-block-column.has-background:nth-child(2):last-child > *{
+    max-width: calc(var(--width-wide) / 2 - var(--space-gutter) * 2);
+}
+.wp-block-columns.alignfull > .wp-block-column.has-background:first-child:nth-last-child(2) > *{
+    margin-left: auto;
+} 
+.wp-block-columns.alignfull > .wp-block-column.has-background:nth-child(2):last-child > *{
+    margin-left: 0
+}
+/*bring wide/default columns within covers or groups in from the edges
+-- done this way to avoid double padding the sides as covers and groups already have padding-- */
+.container--main > div > div > .wp-block-columns:not(.alignfull):not(.alignwide) {
+    max-width: calc(var(--width-default) - (var(--space-gutter) * 2)); 
+    padding-left: 0;
+    padding-right: 0;
+}
+.container--main > div > div > .wp-block-columns.alignwide {
+    max-width: calc(var(--width-wide) - (var(--space-gutter) * 2)); 
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* -- media & text -- */
+.wp-block-media-text{
+    gap: var(--space-gap);
+}
+/*sets edge of colour block in line with width of text of other blocks*/
+.wp-block-media-text:not(.alignwide):not(.alignfull).has-background{
+    max-width: calc(var(--width-default) - var(--space-gutter) * 2); 
+}
+.wp-block-media-text.alignwide.has-background{
+    max-width: calc(var(--width-wide) - var(--space-gutter) * 2); 
+}
+.wp-block-media-text .wp-block-media-text__content{
+    padding-left: 0;
+    padding-right: 0; /*right padding is set on parent media-text-block for wide and default blocks*/
+}
+
+/*remove sidegutter to allow image to reach the edge*/
+.wp-block-media-text.alignfull{
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0
+}
+.wp-block-media-text.alignfull .wp-block-media-text__content{
+    padding-left: var(--space-gutter); 
+    padding-right: var(--space-gutter)
+}
+/*limit width of text content to within the 'wide' content area (alignment fix for full bleed 50/50 image and text)  */
+.wp-block-media-text .wp-block-media-text__content > *{
+    max-width: calc(var(--width-wide) / 2 - var(--space-gutter) * 2);
+    margin-left: 0
+}
+.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content > *{
+    margin-left: auto;
+}
+
+
+/*-- GALLERY -- */
+.blocks-gallery-grid{
+    gap: var(--gallery-gap);
+}
+.wp-block-gallery.alignfull .blocks-gallery-grid{
+    padding-left: var(--gallery-gap);
+    padding-right: var(--gallery-gap);
+}
+
+/*--separator--*/
+/*amend separator width to account for gutter*/
+.wp-block-separator{
+    width: calc(100% - var(--space-gutter) * 2);
+}
+
+
+
+/*top level ELEMENTS */
+/* set max width to default*/
+.container--main.container--fullwidth > *:not(.alignfull):not(.alignwide):not(div){ 
+    width: 100%;
+    max-width: var(--width-default);
+}
+/*if not centered, calculation to left align to wide width*/
+.container--main.container--fullwidth > *:not(.alignfull):not(.alignwide):not(div):not(.text-align-center),
+.container--main.container--fullwidth > .wp-block-buttons:not(.alignfull):not(.alignwide){
+    margin-left: auto;
+    margin-right: auto;
+}
+/*at wide width remove left margin*/
+@media(max-width: 90rem) /*width-wide*/{
+    .container--main.container--fullwidth > *:not(.alignfull):not(.alignwide):not(div):not(.text-align-center),
+    .container--main.container--fullwidth > .wp-block-buttons:not(.alignfull):not(.alignwide){
+        /*margin-left: 0;*/
+    } 
+}
+
+
+/*bring li discs inline with rest of text*/
+.container--main > ul,
+.container--main > ol{
+    padding-left: calc(var(--space-gutter) + var(--space-a))!important;
+}
+/*bring DEFAULT blockquote in line with rest of text*/
+.container--main > .wp-block-quote{
+    max-width: calc(var(--width-default) - var(--space-gutter) * 2)!important;
+}
+.container--main > .wp-block-quote.alignwide{
+    max-width: calc(var(--width-wide) - var(--space-gutter) * 2)!important;
+    
+}
+.container--main > .wp-block-quote.alignfull{
+    max-width: calc(100% - var(--space-gutter) * 2)!important;
+}
+@media(max-width: 90rem) /*width-wide*/{
+    .container--main > .wp-block-quote.alignwide{
+        max-width: calc(100% - var(--space-gutter) * 2)!important;
+    }
+}
+@media(max-width: 60rem) /*width-default*/{
+    .container--main > .wp-block-quote{
+        max-width: calc(100% - var(--space-gutter) * 2)!important;
+    }
+}
+
+
+/*-- top/bottom padding & margins --*/
+/*set space between top level divs (specificity required to override gutenberg default styles)*/
+.container--main > div:not(.wp-block-buttons),
+.container--main > .wp-block-group.has-background,
+.container--main > .wp-block-cover,
+.container--main > figure{
+    margin-top: var(--space-margin-tb);
+    margin-bottom: var(--space-margin-tb);
+}
+.container--main > div:first-child{
+    margin-top: 0;
+}
+.container--main > div:last-child{
+    margin-bottom: var(--space-margin-tb);
+}
+
+/*nullify spacing between full width blocks with background colours*/
+.container--main > :is(div.has-background.alignfull, .wp-block-cover.alignfull, .wp-block-columns.alignfull:not(.cards), .wp-block-group.alignfull:not(.slim-banner), .wp-block-gallery.alignfull, .banner-slider-block ) + :is(div.has-background.alignfull, .wp-block-cover.alignfull, .wp-block-columns.alignfull:not(.cards), .wp-block-gallery.alignfull){
+    margin-top: calc(var(--space-margin-tb) * -1);
+}
+
+/*headings followed by divs/figures */
+:is(h2, h3, h4, h5, h6, p, ul, ol, .wp-block-quote, .wp-block-buttons) + figure,
+:is(h2, h3, h4, h5, h6, p, ul, ol, .wp-block-quote, .wp-block-buttons)  + div:not(.wp-block-buttons) {
+    margin-top: var(--space-margin-tb);
+}
+
+/*override any gutenberg default padding*/
+.container--main > div{
+    padding-top: 0;
+    padding-bottom: 0;
+} 
+.wp-block-group.has-background{
+    padding-top: var(--space-panel-padding-tb);
+    padding-bottom: var(--space-panel-padding-tb);
+}
+
+/*add padding top level divs with a background equivalent to usual margin spacing between blocks*/
+.container--main > .has-background,
+.container--main > .wp-block-cover
+{
+    padding-top: var(--space-padding-tb);
+    padding-bottom: var(--space-padding-tb);
+}
+/* -- media & text -- */
+.wp-block-media-text.has-background {
+    padding-top: var(--space-panel-padding-tb); 
+    padding-bottom: var(--space-panel-padding-tb); 
+}
+/*remove padding from top of full width media-text parent block width background, add it to the text element instead*/
+.wp-block-media-text.alignfull.has-background {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.container--main > .wp-block-media-text .wp-block-media-text__content{
+    padding-top: var(--space-padding-tb);
+    padding-bottom: var(--space-padding-tb);
+}
+.container--main > .wp-block-media-text.alignfull + .wp-block-media-text.alignfull{ /*remove gap between repeated full width media and text blocks with alternating layout*/
+    margin-top: var(--space-margin-tb);
+}
+
+.container--main > .wp-block-media-text.has-media-on-the-right + .wp-block-media-text.has-media-on-the-right,
+.container--main > .wp-block-media-text:not(.has-media-on-the-right) + .wp-block-media-text:not(.has-media-on-the-right){ /*tighten gap between repeated media and text blocks with media on same side*/
+    margin-top: calc(var(--space-margin-tb) * -1 + var(--space-gap));
+}
+
+
+/* -- columns -- */
+.wp-block-columns {
+    margin-bottom: 0; /*overrides default gutenberg*/
+}
+.container--main > .wp-block-columns:not(.has-background) + .wp-block-columns:not(.has-background),
+.container--main > .wp-block-group.has-background .wp-block-columns:not(.has-background) + .wp-block-columns:not(.has-background){ /*remove gap between repeated columns*/
+    margin-top: calc(var(--space-margin-tb) * -1 + var(--space-gap));
+}
+
+
+
+ /* full bleed colour panels*/
+.alignfull > .wp-block-column.has-background{
+    padding-top: var(--space-padding-tb);
+    padding-bottom: var(--space-padding-tb);
+}
+/* -- columns with bgs (cards) -- */
+.cards .wp-block-column.has-background{
+    padding-top: var(--space-panel-padding-tb);
+    padding-bottom: var(--space-panel-padding-tb);
+}
+
+/*--gallery -- */
+.wp-block-gallery.alignfull{
+    padding-top: var(--space-gap-small);
+    padding-bottom: var(--space-gap-small);
+}
+.wp-block-gallery.alignfull.slider{
+    padding-top: calc(var(--space-gap-small)/2);
+    padding-bottom: calc(var(--space-gap-small)/2);
+}
+
+.wp-block-media-text.is-image-fill .wp-block-media-text__media {
+    height: 100%;
+    min-height: 250px;
+    background-size: cover;
+}
+
+.wp-block-group.alignfull > .wp-block-group__inner-container > .alignfull.workroom-slider-block{
+    margin-left:calc(var(--space-gutter) * -1);
+    margin-right:calc(var(--space-gutter) * -1);
+}

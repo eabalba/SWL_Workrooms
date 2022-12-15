@@ -1,0 +1,220 @@
+/* ----- UTILITIES ----- */
+.font-sans{
+	font: var(--font-sans)!important;
+}
+.font-serif{
+	font: var(--font-serif)!important;
+}
+/*added by gutenberg editor*/
+/* -- gutenberg editor styles -- */
+.has-s-font-size {
+	font-size: var(--step--1);
+}
+.has-default-font-size {
+	font-size: var(--step-0);
+}
+.has-m-font-size {
+	font-size: var(--step-1);
+}
+.has-l-font-size {
+	font-size: var(--step-2);
+}
+.has-xl-font-size {
+	font-size: var(--step-3);
+}
+.has-xxl-font-size {
+	font-size: var(--step-4);
+}
+.has-xxxl-font-size {
+	font-size: var(--step-5);
+}
+.has-text-align-center {
+	margin-right: auto;
+	margin-left: auto;
+}
+/*colours set in functions/setup.php*/
+.has-white-background-color {
+	background-color: var(--color-white);
+}
+.has-lgrey-background-color {
+	background-color: var(--color-lgrey);
+}
+.has-grey-background-color {
+	background-color: var(--color-grey);
+}
+.has-dgrey-background-color {
+	background-color: var(--color-dgrey);
+}
+.has-black-background-color {
+	background-color: var(--color-black);
+}
+.has-blue-background-color {
+	background-color: var(--color-blue);
+}
+.has-cyan-background-color {
+	background-color: var(--color-cyan);
+}
+.has-beige-background-color {
+	background-color: var(--color-beige);
+}
+.has-white-color {
+	color: var(--color-white);
+}
+.has-lgrey-color {
+	color: var(--color-lgrey);
+}
+.has-grey-color {
+	color: var(--color-grey);
+}
+.has-dgrey-color {
+	color: var(--color-dgrey);
+}
+.has-black-color {
+	color: var(--color-black);
+}
+.has-blue-color {
+	color: var(--color-blue);
+}
+.has-cyan-color {
+	color: var(--color-cyan);
+}
+.has-beige-color {
+	color: var(--color-beige);
+}
+/*classes can be added to gutenberg blocks*/
+
+.justify-left {
+	margin-left: 0;
+}
+.justify-right {
+	margin-right: 0;
+	margin-left: auto;
+}
+.justify-center {
+	margin-right: auto;
+	margin-left: auto;
+}
+.col {
+	column-gap: var(--space-gap);
+	max-width: var(--width-wide)!important;
+	margin-left: auto!important;
+	margin-right: auto!important;
+}
+.col li {
+	break-inside: avoid-column;
+}
+.col-2 {
+	columns: 2;
+}
+.col-3 {
+	columns: 3;
+}
+.col-4 {
+	columns: 4;
+}
+@media(max-width:  1024px) {
+	.col-2 {
+		columns: 1;
+	}
+	.col-3 {
+		columns: 2;
+	}
+	.col-4 {
+		columns: 3;
+	}
+}
+@media(max-width:  768px) {
+	.col-3 {
+		columns: 1;
+	}
+	.col-4 {
+		columns: 2;
+	}
+}
+@media(max-width:  480px) {
+	.col-4 {
+		columns: 1;
+	}
+}
+/* -- columns as grids -- overriding column functionality -- */
+.wp-block-columns.grid {
+	display: grid;
+	gap: var(--space-gap);
+}
+.wp-block-columns.grid-2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+.wp-block-columns.grid-3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+.wp-block-columns.grid-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+.wp-block-columns.grid-5 {
+	grid-template-columns: repeat(5, 1fr);
+}
+@media(max-width: 1024px) {
+	.wp-block-columns.grid {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	}
+}
+
+/*reduces top and bottom padding*/
+.slim.has-background{
+	padding-top: var(--space-panel-padding-tb)!important;
+	padding-bottom: var(--space-panel-padding-tb)!important;
+}
+.slim.wp-block-media-text .wp-block-media-text__content{
+	padding-top: var(--space-panel-padding-tb)!important;
+	padding-bottom: var(--space-panel-padding-tb)!important;
+}
+
+/*set any link within a 'card' element to target the whole block */
+.link-panel, .link-card {
+	position: relative;
+}
+.link-panel a:before, .link-card a:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+	z-index: 2;;
+}
+
+.images-matchheight img{
+	max-width: 100%;
+	max-height: 120px;
+	height: auto;
+	width: auto;
+	
+}
+.images-cover img{
+	object-fit: cover;
+	width: 100%;
+	max-height: 50vw;
+	height: 200px;
+}
+
+ul.custom-icon{
+	list-style-type: none;
+
+}
+
+
+.icon-check li:before{
+    content:'';
+    background-image: url('data: image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
+    width: 26px;
+    height: 26px;
+    background-size: contain;
+    background-position: top left;
+    display: inline-block;
+    margin-right: 15px;
+    position: relative;
+    top: 0.25em;
+}
+.has-white-color.icon-check li:before{
+	background-image: url('data: image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
+}

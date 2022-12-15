@@ -1,0 +1,19 @@
+/*
+	Theme Name: Sash Workrooms Theme
+	Theme URI: https://www.bamboonine.co.uk
+	Description: Bespoke theme for Sash Workrooms
+	Version: 2
+	Author: Bamboo Nine
+	Author URI: https://www.bamboonine.co.uk
+    Requires at least: 5.0
+    Tested up to: 5.8
+    Requires PHP: 7.0
+*/
+
+
+.tab-block .tab-content-container{
+	grid-template-columns: 3fr 2fr;
+}
+.tab-block .tab-gallery{
+	width: 100%;
+}
